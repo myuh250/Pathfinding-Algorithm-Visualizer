@@ -3,6 +3,10 @@ import random
 from config import ROWS, COLS, CELL_SIZE, NUM_OBSTACLES
 from map.obstacles import Obstacle
 from algorithms.bfs import bfs
+from algorithms.dfs import dfs
+from algorithms.ucs import ucs
+from algorithms.greedy import greedy
+from algorithms.astar import astar
 
 class Button:
     def __init__(self, text, x, y, width, height):
@@ -102,7 +106,7 @@ class Grid:
     def draw_path(self, path):
         for (row, col) in path:
             rect = (col * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size)
-            pygame.draw.rect(self.screen, (146, 120, 232), rect)  # Màu sắc của đường đi
+            pygame.draw.rect(self.screen, (146, 120, 232), rect)  
         pygame.display.flip()
         
     def simulate_steps(self, steps):
@@ -163,10 +167,10 @@ class Grid:
     def start_algorithm(self):
         algorithms = {
             "BFS": bfs,
-            # "DFS": dfs,
-            # "UCS": ucs,
-            # "Greedy": greedy,
-            # "A*": astar
+            "DFS": dfs,
+            "UCS": ucs,
+            "Greedy": greedy,
+            "A*": astar
         }
 
         if self.start_point and self.end_point:
@@ -210,4 +214,4 @@ class Grid:
                         running = False
 
             self.update()
-            clock.tick(60)  # 60 FPS
+            clock.tick(60)  
