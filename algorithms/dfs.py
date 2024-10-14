@@ -1,15 +1,15 @@
 from collections import deque
 from algorithms.func import reconstruct_path
 
-def bfs(start, end, grid, obstacles):
-    queue = deque([start])
+def dfs(start, end, grid, obstacles):
+    stack = deque([start])  
     visited = set()
     visited.add(start)
     parent = {start: None}
-    steps = [] 
+    steps = []  
 
-    while queue:
-        current = queue.popleft()
+    while stack:
+        current = stack.pop()  
         steps.append(current)  
 
         if current == end:
@@ -22,10 +22,10 @@ def bfs(start, end, grid, obstacles):
                 0 <= neighbor[1] < len(grid[0]) and
                 neighbor not in visited and
                 neighbor not in obstacles):  
-                queue.append(neighbor)
+                stack.append(neighbor)
                 visited.add(neighbor)
                 parent[neighbor] = current
 
     path = reconstruct_path(parent, start, end)
 
-    return path, steps  
+    return path, steps
